@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <div class="header">
+    <h1 style="font-family: Arial, sans-serif; font-weight: bold;">Weight on planet</h1>
+   
+  </div>
+</div>
+  <head>
+  <title>Weight On Planet</title>
+  </head>
+  <link rel="stylesheet" href="styles.css" />
+<body >
+    <script src="./src/index.js" type="text/jsx">
+     </script>
+   <div id="root"></div>
+</head>
+
+  <body style="background-color: rgb(29, 28, 28);">
+ 
+   
+
+   <label for="name  :" style="color: rgb(255, 255, 255);"> Name :</label>
+    <input style="padding: 5px;" type="text" id="name"  min="0" oninput="validateInput(this)" />
+  
+    <label for="height :" style="color: rgb(255, 255, 255);"> Height (in cm) :</label>
+    <input  style="padding: 5px;" type="number" id="height" min="0"  />
+
+    <label for="weight :" style="color: rgb(255, 255, 255);"> Weight (in kg) :</label>
+    <input  style="padding: 5px;" type="number" id="earthWeight" min="0"  />
+    
+    <button onclick="calculateWeight()">Calculate</button>  
+  
+    <div class="center-container">
+      <h2 style="color: azure;">Weight on respective planet :</h2>
+    </div>
+    
+    <div id="result" class="result-container"> </div>
+    
+   
+  
+    <script>
+       function validateInput(input) {
+ 
+    input.value = input.value.replace(/[^A-Za-z]/g, '');
+  }
+     
+      function calculateWeight() {
+        
+        const earthWeight = parseFloat(document.getElementById("earthWeight").value);
+        if (earthWeight < 0) {
+      alert("Weigth of any object is a positive number :");
+    }else{
+        
+        const planets = [
+          { name: "Mercury", gravity: 0.38, imageUrl:"mercury.png "},
+          { name: "Venus", gravity: 0.91, imageUrl:"venus.png"},
+          { name: "Mars", gravity: 0.38, imageUrl:"mars.png" },
+          { name: "Jupiter", gravity: 2.34, imageUrl:"jupiter.png"},
+          { name: "Saturn", gravity: 0.93, imageUrl:"saturn.png"},
+          { name: "Uranus", gravity: 0.92, imageUrl:"uranus.png"},
+          { name: "Neptune", gravity: 1.12, imageUrl:"neptune.png"},
+          { name: "Pluto", gravity: 0.06, imageUrl:"pluto.png"}
+        ];
+  
+
+        
+        const resultElement = document.getElementById("result")
+        resultElement.innerHTML = "";
+        
+  
+        if (!isNaN(earthWeight)) {
+          planets.forEach(planet => {
+            
+            const weightOnPlanet = (earthWeight * planet.gravity).toFixed(2);
+            const planetResult =`<div>
+                            <img src="${planet.imageUrl}" alt="Planet Image" style="width: 300px; height: 300px;">
+                            <p>${planet.name}: ${weightOnPlanet}kg</p>
+                                 </div>`;;
+
+            resultElement.innerHTML += planetResult;
+
+            
+          });
+        } else {
+          resultElement.innerHTML = "Please enter a valid weight.";
+        }
+      }
+    }
+        
+    </script>
+   
+    </div>
+</html>
